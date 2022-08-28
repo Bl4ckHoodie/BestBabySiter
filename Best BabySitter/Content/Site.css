@@ -1,0 +1,464 @@
+﻿
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+/*===========================================================================*/
+/*---- Universal Style ----*/
+.navbar-toggle {
+    background-color: forestgreen;
+    border-color: #fbf3f3;
+}
+.navbar-toggle .icon-bar{
+    background-color:#fbf3f3;
+}
+.navbar-nav li a{
+    color: black;
+}
+.container .navbar-header a{
+    color:forestgreen;
+}
+.navbar-nav li:hover {
+    background-color: transparent;
+}
+body {
+    width: 100%
+}
+#container .sitter-dashboard-summary label, #container .sitter-dashboard-events label {
+    display: inline;
+    font-weight: 100;
+}
+#page #container span {
+    color: forestgreen;
+}
+#page #container .container-block span {
+    color: red;
+}
+.normal-button {
+    background-color: white;
+    border: 1px solid black;
+    padding: 11px;
+    border-radius: 15px;
+    margin-bottom: 2em;
+    color: black;
+    cursor: pointer;
+}
+
+.normal-button:hover {
+        background-color: forestgreen;
+        color: white;
+        border-color: white;
+    }
+
+.action-button:hover {
+    color: forestgreen;
+    background-color: white;
+    border-color: forestgreen;
+}
+
+.action-button {
+    background-color: forestgreen;
+    border: 1px solid black;
+    padding: 11px;
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+}
+
+nav li {
+    list-style: none;
+    text-decoration: none;
+    display: inline;
+}
+
+nav li a {
+        text-decoration: none;
+        color: darkslategrey;
+        margin: 0 0.2em;
+    }
+
+.active {
+    color: forestgreen;
+}
+
+nav {
+    text-align: center;
+    margin: 2em 0;
+}
+
+.nav-item {
+    text-align: center;
+    color: darkslategrey;
+    margin: 0.5em;
+}
+
+.menu-style {
+    text-align: center;
+    align-items: center;
+}
+
+
+/*===========================================================================*/
+/*---- Slide Show ----*/
+.slide {
+    height: 500px;
+}
+
+.slideButtons {
+    position: relative;
+    top: -200px;
+}
+
+.imgSlide {
+    display: block;
+    width: 90%;
+    height: 100%;
+    margin: auto;
+}
+
+.slideBtn {
+    margin-left: 5em;
+    margin-right: 5em;
+}
+
+.slideControlButtons {
+    position: absolute;
+    left: 2.3%;
+    width: 95%;
+    color: gray;
+    top: 250px;
+}
+
+.prev {
+    position: relative;
+    float: left;
+    cursor: pointer;
+    font-size: xx-large;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.next {
+    position: relative;
+    float: right;
+    cursor: pointer;
+    font-size: xx-large;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.next:hover {
+        color: forestgreen;
+    }
+
+.prev:hover {
+    color: forestgreen;
+}
+
+/*===========================================================================*/
+/*---- Sitter Dashboard ----*/
+
+.sitterDashboardPicture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: relative;
+    top: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.sitter-dashboard-name {
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+}
+
+.sitter-dashboard-info {
+    width: 90%;
+}
+
+.sitter-dashboard-summary {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.dashboard-summary {
+    margin-top: 50px;
+    width: 180px;
+    height: 100px;
+    border: 1px solid black;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.dashboard-summary-label {
+    margin-top: 0.5em;
+    position: relative;
+    margin-right: 1em;
+    float: right;
+}
+
+.dashboard-summary-info {
+    margin-top: 2.5em;
+}
+
+.dashboard-summary-info span {
+        float: left;
+        position: relative;
+        margin-left: 1em;
+    }
+
+.dashboard-event-adverts {
+    display: inline-block;
+    align-items: center;
+    height: 400px;
+    overflow-y:auto;
+}
+
+.dashboard-event-adverts .event-advert {
+        width: 240px;
+        border: 1px solid black;
+        padding: 1.1em;
+        margin: 10px 2px;
+    }
+
+.dashboard-event-adverts .event-advert:hover {
+            background-color: forestgreen;
+            color: white;
+            cursor: pointer;
+}
+
+.dashboard-summary-info span {
+    font-size: large;
+}
+
+.advert-info {
+    display: inline-block;
+    margin-top: 1.5em;
+}
+
+.advert-id {
+    float: left;
+    font-size: small;
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sitter-dashboard-events {
+    margin-top: 2.5em;
+    display: flex;
+    justify-content: center;
+}
+
+.advert-date, .advert-time, advert-info {
+    float: right;
+    font-size: small;
+    font-weight: bold;
+}
+
+.advert-info .advert-icon {
+    margin-right: 10px;
+}
+
+.latest-advert {
+    border: 1px solid black;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.latest-advert h4 {
+        text-align: center;
+    }
+
+.latest-advert h4 span {
+            margin-right: 5px;
+        }
+
+.dashboard-event {
+    margin: auto;
+}
+
+.sitter-dashboard-reviews h4 {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: forestgreen;
+    color: white;
+}
+
+.parent-review-info {
+    display: inline;
+}
+
+.zmdi-star-outline {
+    float: right;
+}
+
+.parent-review {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.review-message {
+    display: block;
+    margin-top: 20px;
+}
+
+.parent-review-info .review-date, .parent-review-info .review-parent-name {
+    font-size: small;
+    font-weight: bold;
+}
+
+/*===========================================================================*/
+/*^^^---- Tab Screen ----^^^*/
+@media screen and (max-width:768px) {
+    .sitter-dashboard-events {
+        position: relative;
+        top: 30px;
+        display: inline;
+        align-items: center;
+    }
+    .dashboard-event-adverts{
+        display:block;
+    }
+    .upcoming-appointment h4{
+        text-align:center;
+    }
+    .sitter-dashboard-reviews {
+        position: relative;
+        top: 20px;
+    }
+
+    .dashboard-event-adverts .event-advert {
+        width: 92%;
+        margin: 10px auto;
+        padding: 0.7em;
+    }
+   
+    .advert-id {
+        width: 80%;
+    }
+
+    .latest-advert {
+        border: 0px none black;
+    }
+    .navbar-nav  li  a{
+        text-align:center;
+    }
+
+}
+/*===========================================================================*/
+/*^^^---- Mobile Screen ----^^^*/
+@media screen and (max-width:425px) {
+    .advert-date{
+        margin-left:10px;
+    }
+}
+/*===========================================================================*/
+a.zmdi.zmdi-star-outline {
+    float: right;
+    margin: 1px;
+}
+
+.review-stars {
+    margin-right: 2em;
+}
+
+/*===========================================================================*/
+/*---- Parent Create Advert ----*/
+
+.createAd .container-block {
+    padding-left: 2em;
+}
+
+.createAd .container-block .container-label {
+        width: 100px;
+        font-size: medium;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans';
+        margin-right: 4em;
+        font-weight: 100;
+    }
+
+.createAd {
+    width: 60%;
+    margin: auto;
+}
+
+.create-advert-button {
+    margin: 1em;
+    float: right;
+    border-radius: 15px;
+    padding: 0.8em;
+}
+
+.createAd .container-header {
+    font-weight: bold;
+    font-size: 1.45rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans';
+}
+
+/*===========================================================================*/
+/*Manage Advert Style*/
+
+.event-advert *:hover {
+    cursor: pointer;
+}
+
+.manage-adverts-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.manage-adverts-container-item {
+}
+
+.manage-advert-board {
+    flex: 0 50%;
+}
+
+.open-advert-board {
+    flex: 0 30%;
+}
+.manage-advert-btn {
+    display:flex;
+}
+.manage-advert-btn a{
+    flex: 50%;
+    text-align:center;
+    text-decoration:none;
+    color: black;
+    height:30px;
+    border: 1px solid grey;  
+    cursor:pointer;
+}
+.edit-advert-container{
+    display:none;
+}
+.manage-advert-btn .active-tab {
+    background-color: forestgreen;
+    color: white;
+}

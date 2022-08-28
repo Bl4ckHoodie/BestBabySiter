@@ -1,0 +1,103 @@
+﻿@model Best_BabySitter.Models.Advert
+
+@{
+    ViewBag.Title = "Create Advert";
+    Layout = "~/Views/Shared/_ParentLayout.cshtml";
+}
+
+<div class="createAd">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <Label class="container-header">INFORMATION</Label>
+        <hr />
+        <div class="container-block">
+            <p>
+                @Html.LabelFor(model => model.NumKids, htmlAttributes: new { @class = "container-label" })
+                @Html.EditorFor(model => model.NumKids, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.NumKids, "", new { @class = "text-danger" })
+            </p>
+            <p>
+                @Html.LabelFor(model => model.AgeRange, htmlAttributes: new { @class = "container-label" })
+                @Html.EditorFor(model => model.AgeRange, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.AgeRange, "", new { @class = "text-danger" })
+            </p>
+        </div>
+        <Label class="container-header">DATE</Label>
+        <hr />
+        <div class="container-block">
+            <p>
+                @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "container-label" })
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+
+            </p>
+            <p>
+                @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "container-label" })
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </p>
+            <p>
+
+                @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "container-label" })
+                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+
+            </p>
+            <p>
+                @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "container-label" })
+                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+            </p>
+        </div>
+        <Label class="container-header">LOCATION</Label>
+        <hr />
+        <div class="container-block">
+            <p>
+
+                @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "container-label" })
+                @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
+
+            </p>
+            <p>
+                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "container-label" })
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            </p>
+        </div>
+        <Label class="container-header">SPECIFICATION</Label>
+        <hr />
+        <div class="container-block">
+            <p>
+
+                @Html.LabelFor(model => model.Specification, htmlAttributes: new { @class = "container-label" })
+                @Html.EditorFor(model => model.Specification, new { htmlAttributes = new { @class = "" } })
+                @Html.ValidationMessageFor(model => model.Specification, "", new { @class = "text-danger" })
+
+            </p>
+
+        </div>
+        <div class="container-block">
+            <p class="create-advert-buttons">
+                <input type="submit" class="create-advert-button action-button" value="Create Advert" title="Create Advert" />
+                <input type="button" class="create-advert-button normal-button" value="Cancel" title="Cancel" />
+
+            </p>
+        </div>
+    }
+
+</div>
+<br />
+
+@if (TempData["alertMessage"] != null)
+{
+<script type="text/javascript">
+    window.onload = () => { alert('@TempData["alertMessage"]'); }
+    @TempData["alertMessage"] = null;
+</script>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
