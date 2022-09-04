@@ -127,7 +127,7 @@ nav {
 
 .imgSlide {
     display: block;
-    width: 90%;
+    width: 100%;
     height: 100%;
     margin: auto;
 }
@@ -428,6 +428,9 @@ a.zmdi.zmdi-star-outline {
     cursor: pointer;
 }
 
+.selected-advert {
+    background-color: #cdf5c6;
+}
 .manage-adverts-container {
     display: flex;
     justify-content: space-around;

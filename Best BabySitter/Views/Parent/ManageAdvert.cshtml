@@ -4,7 +4,22 @@
     ViewBag.Title = "ManageAdvert";
     Layout = "~/Views/Shared/_ParentLayout.cshtml";
 }
-
+@if (TempData["alertMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @TempData["alertMessage"].ToString().</strong>
+    </div>
+    TempData["alertMessage"] = null;
+}
+else if (TempData["errorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @TempData["errorMessage"].ToString().</strong>
+    </div>
+    TempData["errorMessage"] = null;
+};
 <div class="manage-adverts-container" style="display:flex">
     @{
         List<Best_BabySitter.Models.Advert> list = ViewData["openAdverts"] as List<Best_BabySitter.Models.Advert>;
@@ -16,9 +31,7 @@
                     int count = 0;
                     foreach (var ad in list)
                     {
-                       
-                        //Model.ID = ad.ID;Model.NumKids = ad.NumKids; Model.Specification = ad.Specification;Model.StartDate = ad.StartDate;
-                        <div class="event-advert" onclick="@{pos = count;} ">
+                        <div class="event-advert" onclick="changeAdvert(@count)" >
                             <Label class="advert-id">#AD|@ad.ID</Label>
                             <Label class="advert-date">@String.Format("{0:MM/dd/yyyy}", ad.StartDate)</Label><br />
                             <Label class="advert-time">@String.Format("{0:HH:mm}", ad.StartTime)- @String.Format("{0:HH:mm}", ad.EndTime)</Label>
@@ -27,9 +40,10 @@
                                 <Label>@ad.Street , @ad.City</Label>
                             </div>
                         </div>
-                     count++;
+                        count++;
                     }
                 }
+           
 
             </div>
         </div>
@@ -43,10 +57,11 @@
                         RESPONSES
                     </a>
                 </p>
+
                 <div class="edit-advert-container">
                     @using (Html.BeginForm())
                     {
-                        
+
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <Label class="container-header">INFORMATION</Label>
@@ -54,12 +69,12 @@
                         <div class="container-block">
                             <p>
                                 @Html.LabelFor(model => list[pos].NumKids, htmlAttributes: new { @class = "container-label" })
-                                @Html.EditorFor(model => list[pos].NumKids, new { htmlAttributes = new { @class = "" } })
+                                <input type="number" class="cur-ad-num-kids" min="1" max="20" />
                                 @Html.ValidationMessageFor(model => list[pos].NumKids, "", new { @class = "text-danger" })
                             </p>
                             <p>
                                 @Html.LabelFor(model => list[pos].AgeRange, htmlAttributes: new { @class = "container-label" })
-                                @Html.EditorFor(model => list[pos].AgeRange, new { htmlAttributes = new { @class = "" } })
+                                <input type="text" class="cur-ad-age-range" value="" />
                                 @Html.ValidationMessageFor(model => list[pos].AgeRange, "", new { @class = "text-danger" })
                             </p>
                         </div>
@@ -68,25 +83,25 @@
                         <div class="container-block">
                             <p>
                                 @Html.LabelFor(model => list[pos].StartDate, htmlAttributes: new { @class = "container-label" })
-                                @Html.EditorFor(model => list[pos].StartDate, new { htmlAttributes = new { @class = "" } })
+                                <input type="date" class="cur-ad-start-date" value="" />
                                 @Html.ValidationMessageFor(model => list[pos].StartDate, "", new { @class = "text-danger" })
 
                             </p>
                             <p>
                                 @Html.LabelFor(model => list[pos].EndDate, htmlAttributes: new { @class = "container-label" })
-                                @Html.EditorFor(model => list[pos].EndDate, new { htmlAttributes = new { @class = "" } })
+                                <input type="date" class="cur-ad-end-date" value="" />
                                 @Html.ValidationMessageFor(model => list[pos].EndDate, "", new { @class = "text-danger" })
                             </p>
                             <p>
 
                                 @Html.LabelFor(model => list[pos].StartTime, htmlAttributes: new { @class = "container-label" })
-                                @Html.EditorFor(model => list[pos].StartTime, new { htmlAttributes = new { @class = "" } })
+                                <input type="time" class="cur-ad-start-time" value="" />
                                 @Html.ValidationMessageFor(model => list[pos].StartTime, "", new { @class = "text-danger" })
 
                             </p>
                             <p>
                                 @Html.LabelFor(model => list[pos].EndTime, htmlAttributes: new { @class = "container-label" })
-                                @Html.EditorFor(model => list[pos].EndTime, new { htmlAttributes = new { @class = "" } })
+                                <input type="time" class="cur-ad-end-time" value="" />
                                 @Html.ValidationMessageFor(model => list[pos].EndTime, "", new { @class = "text-danger" })
                             </p>
                         </div>
@@ -96,13 +111,13 @@
                             <p>
 
                                 @Html.LabelFor(model => list[pos].Street, htmlAttributes: new { @class = "container-label" })
-                                @Html.EditorFor(model => list[pos].Street, new { htmlAttributes = new { @class = "" } })
+                                <input type="text" class="cur-ad-street" value="" />
                                 @Html.ValidationMessageFor(model => list[pos].Street, "", new { @class = "text-danger" })
 
                             </p>
                             <p>
                                 @Html.LabelFor(model => list[pos].City, htmlAttributes: new { @class = "container-label" })
-                                @Html.EditorFor(model => list[pos].City, new { htmlAttributes = new { @class = "" } })
+                                <input type="text"  class="cur-ad-city" value=""/>
                                 @Html.ValidationMessageFor(model => list[pos].City, "", new { @class = "text-danger" })
                             </p>
                         </div>
@@ -112,7 +127,9 @@
                             <p>
 
                                 @Html.LabelFor(model => list[pos].Specification, htmlAttributes: new { @class = "container-label" })
-                                @Html.EditorFor(model => list[pos].Specification, new { htmlAttributes = new { @class = "" } })
+                                 <textarea class="cur-ad-specif">
+
+                                </textarea>
                                 @Html.ValidationMessageFor(model => list[pos].Specification, "", new { @class = "text-danger" })
 
                             </p>
@@ -120,7 +137,7 @@
                         </div>
                         <div class="container-block">
                             <p class="create-advert-buttons">
-                                <input type="submit" class="create-advert-button action-button" value="Update Advert" title="Update Advert" />
+                                <input type="submit" class="create-advert-button action-button update-advert" value="Update Advert" title="Update Advert" />
                                 <input type="button" class="create-advert-button normal-button" value="Cancel" title="Cancel" />
 
                             </p>
@@ -131,5 +148,10 @@
 
             </div>
         </div>
-        }
+        <script>
+            
+
+        </script>
+    }
+
 </div>

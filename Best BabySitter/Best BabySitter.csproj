@@ -122,17 +122,28 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ParentController.cs" />
+    <Compile Include="Controllers\SitterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Advert.cs" />
+    <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Parent.cs" />
     <Compile Include="Models\Sitter.cs" />
+    <Compile Include="Models\Slot.cs" />
     <Compile Include="Models\SqlDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\BestBabySitter.accdb" />
+    <Content Include="App_Data\Images\img1.jpg" />
+    <Content Include="App_Data\Images\img2.jpg" />
+    <Content Include="App_Data\Images\img3.jpg" />
+    <Content Include="App_Data\Images\img4.jpg" />
+    <Content Include="App_Data\Images\m.jpg" />
+    <Content Include="App_Data\Images\img5.jpg" />
+    <Content Include="App_Data\Images\slide1.jpg" />
+    <Content Include="App_Data\Images\spikeball-ESlJNsYwIwM-unsplash.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -275,6 +286,8 @@
     <Content Include="Views\Parent\CreateAdvert.cshtml" />
     <Content Include="Views\Parent\ManageAdvert.cshtml" />
     <Content Include="Views\Home\ParentRegister.cshtml" />
+    <Content Include="Views\Shared\_SitterLayout.cshtml" />
+    <Content Include="Views\Sitter\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -10,7 +10,7 @@ namespace Best_BabySitter.Models
     {
         [Key]
         public int ID { get; set; }
-        [Display(Name="Number of Kids")]
+        [Display(Name="Number of kids to be caredfore")]
         [Required(ErrorMessage ="Enter number of kids")]
 
         public int NumKids { get; set; }
@@ -37,6 +37,7 @@ namespace Best_BabySitter.Models
         public string Street { get; set; }
         [Required(ErrorMessage = "Enter city")]
         public string City { get; set; }
+
         [DataType(DataType.MultilineText)]
         [Display(Name = "Specific Requirements")]
         public string Specification { get; set; }

@@ -5,25 +5,43 @@
 }
 
 <div class="sitter-dashboard-info" align="right">
-    <Label class="sitter-dashboard-name">Parent Name</Label>
+    @{
+        <Label class="sitter-dashboard-name">@Session["parentName"].ToString()</Label>
+    }
 </div>
-
+@if (TempData["alertMessage"] != null) {
+<div class="alert alert-success alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @TempData["alertMessage"].ToString().</strong>
+</div>
+    TempData["alertMessage"] = null;
+} else if (TempData["errorMessage"] != null) {
+<div class="alert alert-danger alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @TempData["errorMessage"].ToString().</strong>
+</div>
+    TempData["errorMessage"] = null;
+};
 
 <!-- Dashboard Summary -->
 <div class="sitter-dashboard-summary" align="center">
 
     <div class="dashboard-summary">
-        <Label class="dashboard-summary-label">Booked Slots</Label>
+        <Label class="dashboard-summary-label">Availible Slots</Label>
         <div class="dashboard-summary-info">
             <br /><span class="fa fa-address-book"></span>
-            <Label>13</Label>
+            @{ List<Best_BabySitter.Models.Slot> slots = TempData["slots"] as List<Best_BabySitter.Models.Slot>;
+                <Label>@slots.Count</Label>
+            }
         </div>
     </div>
     <div class="dashboard-summary">
-        <Label class="dashboard-summary-label">Open Advert</Label>
+        <Label class="dashboard-summary-label">My Open Adverts</Label>
         <div class="dashboard-summary-info">
             <br /><span class="fa fa-tasks"></span>
-            <Label>7</Label>
+            @{ List<Best_BabySitter.Models.Advert> ad = TempData["openAdvert"] as List<Best_BabySitter.Models.Advert>;
+                <Label>@ad.Count</Label>
+            }
         </div>
     </div>
 
@@ -34,17 +52,26 @@
     <div class="dashboard-event latest-advert">
         <h4><span class="fa fa-bell"></span>LATEST SLOTS</h4>
         <div class="dashboard-event-adverts">
+            @{
+                //Add appointments to page
+                foreach (var slot in TempData["slots"] as List<Best_BabySitter.Models.Slot>)
 
-            <div class="event-advert">
-                <Label class="advert-id">#SLOT01124</Label>
-                <Label class="advert-date">29 May 2022</Label><br/>
-                <Label class="advert-time">14:00 - 17:00</Label>
-                <div class="advert-info">
-                    <span class=" advert-icon fa fa-calendar-alt"></span>
-                    <Label>City</Label>
-                </div>
-            </div>
-            <div class="event-advert">
+                {
+                    <div class="event-advert">
+                        <Label class="advert-id">#SLOT0_@slot.ID</Label>
+                        <Label class="advert-date">@String.Format("{0:MM/dd/yyyy}", slot.date)</Label><br />
+                        <Label class="advert-time">@String.Format("{0:HH:mm}", slot.time)</Label>
+                        <div class="advert-info">
+                            <span class=" advert-icon fa fa-calendar-alt"></span>
+                            <Label>@slot.city</Label>
+                        </div>
+                    </div>
+
+                }
+
+            }
+
+            <!--<div class="event-advert">
                 <Label class="advert-id">#SLOT01124</Label>
                 <Label class="advert-date">29 January 2022</Label><br />
                 <Label class="advert-time">14:00 - 17:00</Label>
@@ -52,16 +79,8 @@
                     <span class=" advert-icon fa fa-calendar-alt"></span>
                     <Label>City</Label>
                 </div>
-            </div>
-            <div class="event-advert">
-                <Label class="advert-id">#SLOT01124</Label>
-                <Label class="advert-date">29 May 2022</Label><br />
-                <Label class="advert-time">14:00 - 17:00</Label>
-                <div class="advert-info">
-                    <span class=" advert-icon fa fa-calendar-alt"></span>
-                    <Label>City</Label>
-                </div>
-            </div>
+            </div>-->
+
 
         </div>
 
@@ -69,43 +88,26 @@
     <div class="dashboard-event upcoming-appointment">
         <h4>UPCOMMING APPOINTMENTS</h4>
         <div class="dashboard-event-adverts">
+            @{
+                //Add appointments to page
+                foreach (var app in TempData["appointment"] as List<Best_BabySitter.Models.Appointment>)
 
-            <div class="event-advert">
-                <Label class="advert-id">Sitter Name</Label>
-                <Label class="advert-date">29 May 2022</Label><br />
-                <Label class="advert-time">14:00 - 17:00</Label>
-                <div class="advert-info">
-                    <span class=" advert-icon fa fa-map-pin"></span>
-                    <Label>Suburb, City</Label>
-                </div>
-            </div>
-            <div class="event-advert">
-                <Label class="advert-id">Sitter Name</Label>
-                <Label class="advert-date">29 May 2022</Label><br />
-                <Label class="advert-time">14:00 - 17:00</Label>
-                <div class="advert-info">
-                    <span class=" advert-icon fa fa-map-pin"></span>
-                    <Label>Suburb, City</Label>
-                </div>
-            </div>
-            <div class="event-advert">
-                <Label class="advert-id">Sitter Name</Label>
-                <Label class="advert-date">29 May 2022</Label><br />
-                <Label class="advert-time">14:00 - 17:00</Label>
-                <div class="advert-info">
-                    <span class=" advert-icon fa fa-map-pin"></span>
-                    <Label>Suburb, City</Label>
-                </div>
-            </div>
-
+                {
+                    <div class="event-advert">
+                        <Label class="advert-id">@app.appointee</Label>
+                        <Label class="advert-date">@String.Format("{0:MM/dd/yyyy}", app.StartDate)</Label><br />
+                        <Label class="advert-time">@String.Format("{0:HH:mm}", app.StartTime)- @String.Format("{0:HH:mm}", app.EndTime)</Label>
+                        <div class="advert-info">
+                            <span class=" advert-icon fa fa-map-pin"></span>
+                            <Label>@app.Street , @app.City</Label>
+                        </div>
+                    </div>
+                }
+            }
         </div>
+
 
     </div>
 </div>
-@if (TempData["alertMessage"] != null) { 
-<script type="text/javascript">
-    window.onload = () => { alert('@TempData["alertMessage"]'); }
-    @TempData["alertMessage"] = null;
-</script>
-}
+
 

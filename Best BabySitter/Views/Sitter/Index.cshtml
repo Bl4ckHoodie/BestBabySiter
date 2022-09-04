@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_SitterLayout.cshtml";
+}
+
+<div class="sitter-dashboard-info" align="right">
+    @{
+        <Label class="sitter-dashboard-name"></Label>
+    }
+</div>
+@if (TempData["alertMessage"] != null) {
+<div class="alert alert-success alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @TempData["alertMessage"].ToString().</strong>
+</div>
+    TempData["alertMessage"] = null;
+} else if (TempData["errorMessage"] != null) {
+<div class="alert alert-danger alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @TempData["errorMessage"].ToString().</strong>
+</div>
+    TempData["errorMessage"] = null;
+};
+
+<!-- Dashboard Summary -->
+<div class="sitter-dashboard-summary" align="center">
+
+    <div class="dashboard-summary">
+        <Label class="dashboard-summary-label">Slots Created</Label>
+        <div class="dashboard-summary-info">
+            <br /><span class="fa fa-chart-line"></span>
+            <Label>1</Label>
+
+        </div>
+    </div>
+    <div class="dashboard-summary">
+        <Label class="dashboard-summary-label">Jobs Done</Label>
+        <div class="dashboard-summary-info">
+            <br /><span class="fa fa-briefcase"></span>
+            <Label>1</Label>
+
+        </div>
+    </div>
+    <div class="dashboard-summary">
+        <Label class="dashboard-summary-label">Rating</Label>
+        <div class="dashboard-summary-info">
+            <br /><span class="fa fa-star"></span>
+            <Label>4</Label>
+
+        </div>
+    </div>
+</div>
+
+<!-- Dashboard Events -->
+<div class="sitter-dashboard-events">
+    <div class="dashboard-event latest-advert">
+        <h4><span class="fa fa-bell"></span>LATEST SLOTS</h4>
+        <div class="dashboard-event-adverts">
+            @{
+                //Add appointments to page
+                //foreach (var slot in TempData["slots"] as List<Best_BabySitter.Models.Slot>)
+
+                //{
+                    <div class="event-advert">
+                        <Label class="advert-id">#AD0</Label>
+                        <Label class="advert-date">/@String.Format("{0:MM/dd/yyyy}", DateTime.Now)</Label><br />
+                        <Label class="advert-time">@String.Format("{0:HH:mm}", DateTime.Now)</Label>
+                        <div class="advert-info">
+                            <span class=" advert-icon fa fa-calendar-alt"></span>
+                            <Label></Label>
+                        </div>
+                    </div>
+
+               // }
+
+            }
+
+            <!--<div class="event-advert">
+                <Label class="advert-id">#SLOT01124</Label>
+                <Label class="advert-date">29 January 2022</Label><br />
+                <Label class="advert-time">14:00 - 17:00</Label>
+                <div class="advert-info">
+                    <span class=" advert-icon fa fa-calendar-alt"></span>
+                    <Label>City</Label>
+                </div>
+            </div>-->
+
+
+        </div>
+
+    </div>
+    <div class="dashboard-event upcoming-appointment">
+        <h4>UPCOMMING APPOINTMENTS</h4>
+        <div class="dashboard-event-adverts">
+            @{
+                //Add appointments to page
+                //foreach (var app in TempData["appointment"] as List<Best_BabySitter.Models.Appointment>)
+
+               // {
+                    <div class="event-advert">
+                        <Label class="advert-id"> </Label>
+                        <Label class="advert-date">@String.Format("{0:MM/dd/yyyy}", DateTime.Now)</Label><br />
+                        <Label class="advert-time">@String.Format("{0:HH:mm}", DateTime.Now)- @String.Format("{0:HH:mm}", DateTime.Now)</Label>
+                        <div class="advert-info">
+                            <span class=" advert-icon fa fa-map-pin"></span>
+                            <Label> </Label>
+                        </div>
+                    </div>
+               // }
+            }
+        </div>
+
+
+    </div>
+</div>
+
+

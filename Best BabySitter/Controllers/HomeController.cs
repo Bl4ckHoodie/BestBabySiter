@@ -1,4 +1,6 @@
-﻿using Best_BabySitter.Models;
+﻿
+//Hlomla Version
+using Best_BabySitter.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +46,7 @@ namespace Best_BabySitter.Controllers
                     TempData["alertMessage"] = "Succefully Registered Created";
                     int id = SqlDataAccess.getParentID(parent);
                     if(id!= -1){
-                    Session["parentID"] = 
+                        Session["parentID"] = id;
                     return RedirectToAction("Index", "Parent");
                     }
                 }else if (valid == 0)
