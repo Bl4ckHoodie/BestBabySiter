@@ -427,7 +427,9 @@ a.zmdi.zmdi-star-outline {
 .event-advert *:hover {
     cursor: pointer;
 }
-
+.selected-response-sitter {
+    background-color: #cdf5c6;
+}
 .selected-advert {
     background-color: #cdf5c6;
 }
@@ -461,7 +463,59 @@ a.zmdi.zmdi-star-outline {
 .edit-advert-container{
     display:none;
 }
+.edit-advert-reposonse-container{
+    display:none;
+}
 .manage-advert-btn .active-tab {
     background-color: forestgreen;
     color: white;
+}
+.edit-advert-reposonse-manager {
+    display: flex;
+    justify-content: space-around;
+}
+.advert-repsonse-container .sitter_profile-pic{
+    width:135px;
+    height:130px;
+    border-radius:50%;
+    margin: auto;
+    text-align:center;
+}
+.advert-repsonse-container label{
+    display:block;
+    
+
+}
+.advert-repsonse-container label i{
+color:forestgreen;
+}
+.advert-repsonse-container {
+    padding: 0 2em;
+    width: -webkit-fill-available;
+}
+.sitter-event-adverts {
+    display: inline-block;
+    align-items: center;
+    padding: 0 1em;
+    height: 400px;
+    overflow-y: auto;
+}
+.sitter-event-adverts .sitter-response {
+        border-color: black;
+        border-width: 1px;
+        border-style: solid;
+        margin: 5px 0;
+        cursor: pointer;
+}
+    .sitter-event-adverts .sitter-response:hover {
+        background-color: forestgreen;
+        color:white;
+        cursor: pointer;
+    }
+.advert-repsonse-container{
+    display:none;
+}
+.advert-repsonse-container a{
+    text-decoration:none;
+    color:black;
 }

@@ -61,5 +61,28 @@ namespace Best_BabySitter.Controllers
             TempData["alertMessage"] = "Error occured while registering parent";
             return View();
         }
+
+
+        public ActionResult ParentLogin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ParentLogin(Parent parent)
+        {
+                int parent_ID = SqlDataAccess.LoginParent(parent);
+                if (parent_ID != -1)
+                {
+                    Session["parentID"] = parent_ID;
+                    return RedirectToAction("Index", "Parent");
+                }
+                else
+                {
+                    ModelState.AddModelError("Error", new Exception("Incorrect email/password"));
+                    return View();
+                }
+        }
     }
 }

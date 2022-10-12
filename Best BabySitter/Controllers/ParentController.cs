@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace Best_BabySitter.Controllers
 {
@@ -13,7 +14,6 @@ namespace Best_BabySitter.Controllers
         public ActionResult Index()
         {
 
-            Session["parentID"] = 1;
             if(Session["parentID"] == null){
                 return RedirectToAction("ParentLogin","Home");
             }
@@ -26,11 +26,15 @@ namespace Best_BabySitter.Controllers
         }
         public ActionResult Advert()
         {
-            return View();
+            if (Session["parentID"] == null)
+            {
+                return RedirectToAction("ParentLogin", "Home");
+            }
+            else
+                return View();
         }
         public ActionResult CreateAdvert()
         {
-            //Session["parentID"] = 1;
             if(Session["parentID"] == null){
                 return RedirectToAction("ParentLogin","Home");
             }else
@@ -56,44 +60,49 @@ namespace Best_BabySitter.Controllers
         }
         public ActionResult ManageAdvert()
         {
-            //Session["parentID"] = 1;
             if(Session["parentID"] == null){
                 return RedirectToAction("ParentLogin","Home");
             }
             List <Advert> openAdverts = SqlDataAccess.getOpenAdverts(int.Parse(Session["parentID"].ToString()));
             ViewData["openAdverts"] = openAdverts;
+            ViewData["adResponses"] = new List<Sitter>();
             return View() ;
         }
 
         public JsonResult AdvertDetail(string id)
         {
             int pos = int.Parse(id);
-            TempData["curAdvert"] = id;
+            Session["curAdvert"] = id;
             List<Advert> list = SqlDataAccess.getOpenAdverts(int.Parse(Session["parentID"].ToString()));
+            Advert advert = list[int.Parse(Session["curAdvert"].ToString())];
             return Json(list[pos]);
           
         }
 
         public JsonResult GetResponses(){
             List<Advert> list = SqlDataAccess.getOpenAdverts(int.Parse(Session["parentID"].ToString()));
-            Advert advert = list[int.Parse(TempData["curAdvert"].ToString())];
+            Advert advert = list[int.Parse(Session["curAdvert"].ToString())];
             List<Sitter> sitters = SqlDataAccess.getResponses(advert.ID);
             return Json(sitters);
         }
-        public int UpdateAdvert(string obj){
+
+        public int UpdateAdvert(string adv)
+        {
             List<Advert> list = SqlDataAccess.getOpenAdverts(int.Parse(Session["parentID"].ToString()));
-            Advert advert = list[int.Parse(TempData["curAdvert"].ToString())];
+            Advert advert = list[int.Parse(Session["curAdvert"].ToString())];
             var js =  new JavaScriptSerializer();
-            Advert newAdd = js.Deserialize<Advert>(obj);
-            int valid = SqlDataAccess.updateAdvert(advert);
+            Advert newAdd = js.Deserialize<Advert>(adv);
+            newAdd.ID = advert.ID;
+            newAdd.DateCreated = advert.DateCreated;
+            int valid = SqlDataAccess.updateAdvert(newAdd);
             if(valid == 1)
             {
                 TempData["alertMessage"] = "Advert Succefully Updated";
+                return 1;
             }else{
                 TempData["errorMessage"] = "Error occured while creating Updating";
+                return -1;
             }
-
-            return valid;
         }
 
         public ActionResult Logout()
@@ -103,7 +112,7 @@ namespace Best_BabySitter.Controllers
             TempData.Clear();
             return RedirectToAction("Index", "Home");
         }
-        public int TestAjax(string id)
+        public int TestAjax(JsonResult id)
         {
             return int.Parse(id.ToString());
         }

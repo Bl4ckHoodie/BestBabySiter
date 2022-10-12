@@ -23,9 +23,9 @@ namespace Best_BabySitter.Models
             {
                 string sql;
                 if (newAdvert.Specification == null)
-                    sql = "Insert INTO Advert (parent_ID, num_kids, specification, location, start_date, end_date, start_time, end_time, date_created) VALUES (" + parentID + ", " + newAdvert.NumKids + ", 'None', '" + newAdvert.Street + ", " + newAdvert.City + "', '" + newAdvert.StartDate + "', '" + newAdvert.EndDate + "', '" + newAdvert.StartTime + "', '" + newAdvert.EndTime + "','" + newAdvert.DateCreated + "')";
+                    sql = "Insert INTO Advert (parent_ID, num_kids, specification, location, start_date, end_date, start_time, end_time, date_created) VALUES (" + parentID + ", " + newAdvert.NumKids + ", 'None', '" + newAdvert.Street + "," + newAdvert.City + "', '" + newAdvert.StartDate + "', '" + newAdvert.EndDate + "', '" + newAdvert.StartTime + "', '" + newAdvert.EndTime + "','" + newAdvert.DateCreated + "')";
                 else
-                    sql = "Insert INTO Advert (parent_ID, num_kids, specification, location, start_date, end_date, start_time, end_time, date_created) VALUES (" + parentID + ", " + newAdvert.NumKids + ", '" + newAdvert.Specification + "', '" + newAdvert.Street + ", " + newAdvert.City + "', '" + newAdvert.StartDate + "', '" + newAdvert.EndDate + "', '" + newAdvert.StartTime + "', '" + newAdvert.EndTime + "','" + newAdvert.DateCreated + "')";
+                    sql = "Insert INTO Advert (parent_ID, num_kids, specification, location, start_date, end_date, start_time, end_time, date_created) VALUES (" + parentID + ", " + newAdvert.NumKids + ", '" + newAdvert.Specification + "', '" + newAdvert.Street + "," + newAdvert.City + "', '" + newAdvert.StartDate + "', '" + newAdvert.EndDate + "', '" + newAdvert.StartTime + "', '" + newAdvert.EndTime + "','" + newAdvert.DateCreated + "')";
                 OleDbConnection conn = new OleDbConnection(getConnectionString());
                 conn.Open();
                 OleDbCommand com = new OleDbCommand(sql, conn);
@@ -84,9 +84,7 @@ namespace Best_BabySitter.Models
                 string sql;
                 OleDbConnection conn = new OleDbConnection(getConnectionString());
                 conn.Open();
-                sql = @"UPDATE Advert 
-                        SET num_kids =" +advert.NumKids+ ", specification = '"+ advert.Specification +"', location='"+advert.Street+", "+advert.City+"', start_date='"+advert.StartDate+"', end_date='"+advert.EndDate+"', start_time='"+advert.StartTime+"', end_time='"+ advert.EndTime +"',
-                        WHERE ID="+advert.ID+" ";
+                sql = "UPDATE Advert SET num_kids =" + advert.NumKids + ", specification = '" + advert.Specification + "', location='" + advert.Street + "," + advert.City + "', start_date='" + advert.StartDate + "', end_date='" + advert.EndDate + "', start_time='" + advert.StartTime + "', end_time='" + advert.EndTime + "' WHERE (Advert_ID=" + advert.ID + ") ";
                 OleDbCommand update = new OleDbCommand(sql, conn);
                 update.ExecuteNonQuery();
                 conn.Close();
@@ -98,6 +96,7 @@ namespace Best_BabySitter.Models
             }
             return -1;
         }
+
         public static int getParentID(Parent parent) {
             try
             {
@@ -129,7 +128,47 @@ namespace Best_BabySitter.Models
             return -1;
         }
 
+        public static List<Sitter> getResponses(int advertID)
+        {
+            List<Sitter> sitters = new List<Sitter>();
+            try
+            {
+                string sql = @"SELECT jobApplication.sitter_ID, Sitter.f_name, Sitter.L_name, Sitter.email, Sitter.AboutMe, Sitter.city, Sitter.profilePicPath, Sitter.contact_NO, Sitter.chargePerService, Sitter.street
+                               FROM   ((jobApplication INNER JOIN
+                               Sitter ON jobApplication.sitter_ID = Sitter.sitter_ID) INNER JOIN
+                               Advert ON Advert.Advert_ID = jobApplication.advert_ID)
+                               WHERE (jobApplication.advert_ID = "+advertID+") AND (Advert.closed = False)";
 
+                OleDbConnection conn = new OleDbConnection(getConnectionString());
+                conn.Open();
+                OleDbCommand com = new OleDbCommand(sql, conn);
+                OleDbDataReader data = com.ExecuteReader();
+                while (data.Read())
+                {
+                    sitters.Add(new Sitter
+                    {
+                        sitter_ID = int.Parse(data["sitter_ID"].ToString()),
+                        f_name = data["f_name"].ToString(),
+                        L_name = data["L_name"].ToString(),
+                        password = "not happening buddy :P",
+                        email = data["email"].ToString(),
+                        AboutMe = data["AboutMe"].ToString(),
+                        city = data["city"].ToString(),
+                        profilePicPath = data["profilePicPath"].ToString(),
+                        contact_NO = data["contact_NO"].ToString(),
+                        chargePerService =  int.Parse(data["chargePerService"].ToString()),
+                        street = data["street"].ToString()
+                    });
+                }
+                conn.Close();
+                return sitters;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: {0}", ex.Message);
+                return null;
+            }
+        }
         public static List<Advert> getOpenAdverts(int parentID)
         {
             List<Advert> adverts = new List<Advert>();
@@ -255,7 +294,7 @@ namespace Best_BabySitter.Models
 
         } 
 
-       public static List<Slot> getSlots(int parentID)
+         public static List<Slot> getSlots(int parentID)
         {
             List<Slot> slots = new List<Slot>();
             Parent parent = getParentData(parentID);
@@ -287,6 +326,38 @@ namespace Best_BabySitter.Models
             {
                 Console.WriteLine("Error: {0}", ex.Message);
                 return slots;
+            }
+        }
+
+        public static int LoginParent(Parent parent)
+        {
+            string sql;
+            OleDbConnection conn = new OleDbConnection(getConnectionString());
+            try
+            {
+                sql = "SELECT parent_ID FROM Parent WHERE email='" + parent.email + "' AND [password]='" + parent.password + "'";
+                conn.Open();
+                OleDbCommand com = new OleDbCommand(sql, conn);
+                OleDbDataReader data = com.ExecuteReader();
+                if (data.HasRows)
+                {
+                    int parent_ID = 1;
+                    while (data.Read())
+                    {
+                        parent_ID = data.GetInt32(0);
+                    }
+                    return parent_ID;
+
+                }
+                else
+                {
+                    return -1;
+                }
+                
+            }catch(Exception ex)
+            {
+                Console.WriteLine("{0}", ex.Message);
+                return -1;
             }
         }
     }

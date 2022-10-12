@@ -10,12 +10,13 @@ namespace Best_BabySitter.Models
     {
         [Key]
         public int ID { get; set; }
-        [Display(Name="Number of kids to be caredfore")]
+        [Display(Name="Number of kids to be cared for")]
         [Required(ErrorMessage ="Enter number of kids")]
 
         public int NumKids { get; set; }
         [Display(Name = "Age Range")]
         [Required(ErrorMessage = "Enter age range e.g 7-15")]
+ 
         public string AgeRange { get; set; }
         [Display(Name = "Start Date")]
         [DataType(DataType.Date)]

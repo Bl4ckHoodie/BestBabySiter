@@ -288,6 +288,7 @@
     <Content Include="Views\Home\ParentRegister.cshtml" />
     <Content Include="Views\Shared\_SitterLayout.cshtml" />
     <Content Include="Views\Sitter\Index.cshtml" />
+    <Content Include="Views\Home\ParentLogin.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
