@@ -3,7 +3,7 @@
 
 <html>
 <head>
-    <title>Sitter| @ViewBag.Title</title>
+    <title>Admin| @ViewBag.Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="@Url.Content("~/Content/Images/logo.jpg")">
     @Styles.Render("~/Content/css")
@@ -23,17 +23,16 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Dashboard", "Index", "Sitter")</li>
-                        <li>@Html.ActionLink("Profile", "Profile", "Sitter")</li>
-                        <li>@Html.ActionLink("Adverts", "Advert", "Sitter")</li>
-                        <li>@Html.ActionLink("Slot", "Slots", "Sitter")</li>
-                        <li>@Html.ActionLink("Settings", "Settings", "Sitter")</li>
-                        <li>@Html.ActionLink("Logout", "Logout", "Sitter")</li>
+                        <li>@Html.ActionLink("Dashboard", "Index", "Admin")</li>
+                        <li>@Html.ActionLink("Verify Sitter", "Verify_Sitter", "Admin")</li>
+                        <li>@Html.ActionLink("Suspend User", "Suspend_User", "Admin")</li>
+                        <li>@Html.ActionLink("Settings", "Update_Info", "Admin")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Admin")</li>
                     </ul>
                 </div>
             </div>
         </header>
-        <div class="sitter-main-container">
+        <div class="parent-main-container">
             <section id="container">
                 @RenderBody()
             </section>
@@ -43,7 +42,7 @@
             <p></p>
         </footer>
     </div>
-    <footer class="site-footer">
+    <footer class="site-footer" style="position:relative">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-6">
@@ -56,12 +55,11 @@
                 <div class="col-xs-6 col-md-3">
                     <h6>Quick Links</h6>
                     <ul class="footer-links">
-                        <li><a href="/Sitter/Index/">Dashboard</a></li>
-                        <li><a href="/Sitter/Profile/">Find Sitters</a></li>
-                        <li><a href="/Sitter/Advert/">Advert</a></li>
-                        <li><a href="/Sitter/Slots/">Slots</a></li>
-                        <li><a href="/Sitter/Settings/">Settings</a></li>
-                        <li><a href="/Sitter/Logout/">Logout</a></li>
+                        <li><a href="/Admin/Index/">Dashboard</a></li>
+                        <li><a href="/Admin/Verify_Sitter/">Advert</a></li>
+                        <li><a href="/Admin/Suspend_User/">Slots</a></li>
+                        <li><a href="/Admin/Update_Info/">Settings</a></li>
+                        <li><a href="/Admin/Logout/">Logout</a></li>
                     </ul>
                 </div>
             </div>

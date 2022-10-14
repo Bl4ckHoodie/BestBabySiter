@@ -15,6 +15,10 @@ namespace Best_BabySitter.Models
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "Enter start date")]
         public DateTime StartDate { get; set; }
+        [Display(Name = "End Date")]
+        [DataType(DataType.Date)]
+        [Required(ErrorMessage = "Enter end date")]
+        public DateTime EndDate { get; set; }
         [Display(Name = "Start Time")]
         [DataType(DataType.Time)]
         [Required(ErrorMessage = "Enter start time")]
@@ -27,5 +31,7 @@ namespace Best_BabySitter.Models
         public string Street { get; set; }
         [Required(ErrorMessage = "Enter city")]
         public string City { get; set; }
+
+        public string email { get; set; }
     }
 }

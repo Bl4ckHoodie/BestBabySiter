@@ -1,0 +1,63 @@
+﻿@model Best_BabySitter.Models.Sitter
+
+@{
+    ViewBag.Title = "Sitter_Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Login as Sitter</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.sitter_ID)
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Email Address" } })
+            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control form-pass", placeholder = "Enter Password" } })
+            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+            <input type="checkbox" id="show-pass" /><label for="show-pass">Show Password</label>
+            @{ ModelState stateBag = new ModelState();
+                if (ViewData.ModelState.TryGetValue("Error", out stateBag))
+                {
+                    if (stateBag.Errors.Count > 0)
+                    {
+                        <p><a class="text-danger" style="text-align:center">@stateBag.Errors[0].Exception.Message</a></p>
+                    }
+                }
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="reset"  value="Cancel" class="btn normal-button" style="position:relative;top:14px; margin-right:10px;" />
+            <input type="submit" value="Login" class="btn action-button" />
+        </div>
+    </div>
+    <a href="@Url.Action("Sitter_Register")">Don't have an account? Register..</a>
+</div>
+<br/>
+}
+
+<div>
+    @Html.ActionLink("Back to Home", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

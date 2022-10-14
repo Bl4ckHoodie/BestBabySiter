@@ -1,0 +1,106 @@
+﻿@model Best_BabySitter.Models.Sitter
+
+@{
+    ViewBag.Title = "Sitter_Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sitter Registration</h2>
+
+
+@using (Html.BeginForm("Sitter_Register", "Home",
+            new { ReturnUrl = ViewBag.ReturnUrl },
+            FormMethod.Post, new { @class = "sitter-register-form" }))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.f_name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.f_name, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter first name" } })
+            @Html.ValidationMessageFor(model => model.f_name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.L_name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.L_name, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter last name" } })
+            @Html.ValidationMessageFor(model => model.L_name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter email address" } })
+            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.street, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.street, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter street address" } })
+            @Html.ValidationMessageFor(model => model.street, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.city, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter city address" } })
+            @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="loader-container">
+
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.cv_filePath, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" id="sitter_cv" name="FileUpload" accept="image/*,.pdf,.docx" required />
+            @Html.ValidationMessageFor(model => model.cv_filePath, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter password" } })
+            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+            @{ ModelState stateBag = new ModelState();
+                if (ViewData.ModelState.TryGetValue("Error", out stateBag))
+                {
+                    if (stateBag.Errors.Count > 0)
+                    {
+                        <p><a class="text-danger" style="text-align:center">@stateBag.Errors[0].Exception.Message</a></p>
+                    }
+                }
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="checkbox" id="terms-condition" title="Terms and Conditions" required /><a href="https://www.sanparks.org/docs/groups_tenders/2020/rfq-bsp-access-control/terms-of-reference.pdf"><label for="terms-condition">Terms and Conditions</label></a>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <p>
+
+
+                <input type="reset" value="Cancel" class="btn normal-button" style="position:relative;top:14px; margin-right:10px;" />
+                <input type="submit" value="Register As Sitter" class="btn register-sitter-btn action-button" />
+            </p>
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to Home", "Index")
+</div>

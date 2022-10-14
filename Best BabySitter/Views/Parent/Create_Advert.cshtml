@@ -4,8 +4,23 @@
     ViewBag.Title = "Create Advert";
     Layout = "~/Views/Shared/_ParentLayout.cshtml";
 }
-
-<div class="createAd">
+@if (TempData["alertMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @TempData["alertMessage"].ToString().</strong>
+    </div>
+    TempData["alertMessage"] = null;
+}
+else if (TempData["errorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @TempData["errorMessage"].ToString().</strong>
+    </div>
+    TempData["errorMessage"] = null;
+};
+<div class="createAd" style="overflow-y: auto; max-height: 78vh; ">
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -15,12 +30,12 @@
         <div class="container-block">
             <p>
                 @Html.LabelFor(model => model.NumKids, htmlAttributes: new { @class = "container-label" })
-                @Html.EditorFor(model => model.NumKids, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(model => model.NumKids, new { htmlAttributes = new { @class = "", placeholder = "Enter number of children/kids" } })
                 @Html.ValidationMessageFor(model => model.NumKids, "", new { @class = "text-danger" })
             </p>
             <p>
                 @Html.LabelFor(model => model.AgeRange, htmlAttributes: new { @class = "container-label" })
-                @Html.EditorFor(model => model.AgeRange, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(model => model.AgeRange, new { htmlAttributes = new { @class = "", placeholder = "Enter age range e.g 8-12 years" } })
                 @Html.ValidationMessageFor(model => model.AgeRange, "", new { @class = "text-danger" })
             </p>
         </div>
@@ -28,26 +43,27 @@
         <hr />
         <div class="container-block">
             <p>
+
                 @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "container-label" })
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "create-advert-start-date" } })
                 @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
 
             </p>
             <p>
                 @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "container-label" })
-                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "create-advert-end-date", disable = "true" } })
                 @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
             </p>
             <p>
 
                 @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "container-label" })
-                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "create-advert-start-time" } })
                 @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
 
             </p>
             <p>
                 @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "container-label" })
-                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "create-advert-end-time" } })
                 @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
             </p>
         </div>
@@ -57,14 +73,20 @@
             <p>
 
                 @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "container-label" })
-                @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "create-advert-street", placeholder = "Enter street" } })
                 @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
 
             </p>
             <p>
                 @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "container-label" })
-                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "create-advert-city", placeholder = "Enter city" } })
                 @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            </p>
+            <p>
+                <i style="float:right">
+                    <input type="checkbox" id="default-location" name="default_location" value="Use Default Location" class="create-advert-default-location" title="Use Default Location" />
+                    <label for="default-location"> Use Default Location</label>
+                </i><br>
             </p>
         </div>
         <Label class="container-header">SPECIFICATION</Label>
@@ -73,7 +95,7 @@
             <p>
 
                 @Html.LabelFor(model => model.Specification, htmlAttributes: new { @class = "container-label" })
-                @Html.EditorFor(model => model.Specification, new { htmlAttributes = new { @class = "" } })
+                @Html.EditorFor(model => model.Specification, new { htmlAttributes = new { @class = "", placeholder = "Enter specific skills, resources, etc. required" } })
                 @Html.ValidationMessageFor(model => model.Specification, "", new { @class = "text-danger" })
 
             </p>
@@ -93,10 +115,10 @@
 
 @if (TempData["alertMessage"] != null)
 {
-<script type="text/javascript">
+    <script type="text/javascript">
     window.onload = () => { alert('@TempData["alertMessage"]'); }
     @TempData["alertMessage"] = null;
-</script>
+    </script>
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

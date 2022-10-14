@@ -1,21 +1,21 @@
-﻿@model Best_BabySitter.Models.Parent
+﻿@model Best_BabySitter.Models.Admin
 
 @{
-    ViewBag.Title = "ParentLogin";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Admin.cshtml";
 }
 
-<h2>ParentLogin</h2>
+<h2>Admin Login</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Parent</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-       
+        @Html.HiddenFor(model => model.Admin_ID)
+
         <div class="form-group">
             @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

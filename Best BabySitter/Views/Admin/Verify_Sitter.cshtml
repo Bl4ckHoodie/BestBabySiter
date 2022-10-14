@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Best_BabySitter.Models.Sitter>
+
+@{
+    ViewBag.Title = "Verify_Sitter";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+@if (TempData["alertMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @TempData["alertMessage"].ToString().</strong>
+    </div>
+    TempData["alertMessage"] = null;
+}
+else if (TempData["errorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @TempData["errorMessage"].ToString().</strong>
+    </div>
+    TempData["errorMessage"] = null;
+};
+
+<h2>Verify Sitter</h2>
+
+<div class="verify-container">
+    <div class="">
+        <p>
+            <div class="input-group">
+                <div class="form-outline">
+                    <input id="search-focus" placeholder="Search.." type="search" class="form-control" />
+
+                </div>
+            </div>
+        </p>
+        <h4>@Model.ToList().Count Result(s) Found</h4>
+        <div class="verify-list">
+            @foreach (var item in Model)
+            {
+                <div class="sitter-container-block verify-sitter" onclick="getverifySitter(@item.sitter_ID)">
+                    <Label class="sitter-id">#ST|@item.sitter_ID</Label>
+                    <Label class="sitter-name">@item.L_name @item.f_name</Label><br />
+                    <Label class="sitter-email">@item.email</Label>
+                </div>
+
+            }
+
+        </div>
+    </div>
+
+    <div class="verify-block-sitter">
+        <div class="verify-block verify-sitter-info">
+            <h2>Sitter Information</h2>
+            <p>Last Name: <i class="verify-sitter-info-lname"></i> </p>
+            <p>First Name: <i class="verify-sitter-info-fname"></i> </p>
+            <p>Email Address: <i class="verify-sitter-info-email"></i></p>
+        </div>
+        <div class="verify-block ">
+            <p>
+                <object class="verify-sitter-document" data="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20210101201653/PDF.pdf">
+                </object>
+            </p>
+
+        </div>
+        <p>
+            <input type="reset" name="decline" class="decline-verify-sitter-btn normal-button" value="Decline"/>
+            <input type="submit" name="verified" value="Verified" class="accept-verify-sitter-btn action-button"/>
+        </p>
+    </div>
+</div>

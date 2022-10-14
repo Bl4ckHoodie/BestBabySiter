@@ -8,11 +8,13 @@
         <a class="next"> &#10095</a>
     </div>
     <div class="slide">
-        <img src="https://img.freepik.com/free-photo/japanese-family-playing-with-toys-floor-design-space-banner_53876-132138.jpg?w=1800&t=st=1661842723~exp=1661843323~hmac=ca4ac6ebdc1060930c397768b9d809b3633d88a3409170ee3a198f6c99a2c6bc" class="imgSlide"  alt="Sample pic"/>
+        <img src="@Url.Content("~/Content/Images/img1.jpg")" class="imgSlide" alt="Sample pic" />
         <div class="slideButtons" align="center">
-            <button id="btnFindSitter" class="normal-button slideBtn" onclick="window.location.href('@Url.Action("ParentLogin", "Home")';)">Find a Sitter</button>
-            <button id="btnBecomeSitter" class="action-button slideBtn" onclick="window.location.href('@Url.Action("SitterLogin", "Home")';">Become a Sitter</button>
+             <a href="/Home/Parent_Login"><button id="btnFindSitter" class="normal-button slideBtn" onclick="location.href('/Home/Parent_Login');">Find a Sitter</button></a>
+            <a href="/Home/Sitter_Login"><button id="btnBecomeSitter" class="action-button slideBtn" onclick="location.href('/Home/Sitter_Login');">Become a Sitter</button></a>
+
         </div>
     </div>
 
 </div>
+

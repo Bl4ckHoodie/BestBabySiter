@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Best_BabySitter.Models.Slot>
+
+@{
+    ViewBag.Title = "Slots";
+    Layout = "~/Views/Shared/_SitterLayout.cshtml";
+}
+
+<h2>Slots</h2>
+
+<div class="">
+    <p>
+        <div class="input-group">
+            <div class="form-outline">
+                <input id="search-focus" placeholder="Search.." type="search" class="form-control" />
+
+            </div>
+        </div>
+    </p>
+    <h4>@Model.ToList().Count Result(s) Found</h4>
+    <div class="verify-list">
+        @foreach (var item in Model)
+        {
+        <div class="sitter-container-block verify-sitter" onclick="getverifySitter(@item.ID)">
+            <Label class="sitter-id">#ST|@item.ID</Label>
+            <Label class="sitter-name">@item.start_date - @item.end_date</Label><br />
+            <Label class="sitter-name">@item.start_time - @item.end_time</Label><br />
+            <Label class="sitter-email">@item.city</Label>
+        </div>
+
+        }
+
+    </div>
+</div>
+
+<div class="verify-block-sitter">
+    <div class="verify-block verify-sitter-info">
+        <h2>Sitter Information</h2>
+        <p>Last Name: <i class="verify-sitter-info-lname"></i> </p>
+        <p>First Name: <i class="verify-sitter-info-fname"></i> </p>
+        <p>Email Address: <i class="verify-sitter-info-email"></i></p>
+    </div>
+    <div class="verify-block ">
+        <p>
+            <object class="verify-sitter-document" data="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20210101201653/PDF.pdf">
+            </object>
+        </p>
+
+    </div>
+    <p>
+        <input type="reset" name="decline" class="decline-verify-sitter-btn normal-button" value="Decline" />
+        <input type="submit" name="verified" value="Verified" class="accept-verify-sitter-btn action-button" />
+    </p>
+</div>

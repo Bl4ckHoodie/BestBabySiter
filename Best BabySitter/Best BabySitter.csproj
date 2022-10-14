@@ -120,6 +120,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ParentController.cs" />
     <Compile Include="Controllers\SitterController.cs" />
@@ -128,6 +129,8 @@
     </Compile>
     <Compile Include="Models\Advert.cs" />
     <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\MailManager.cs" />
     <Compile Include="Models\Parent.cs" />
     <Compile Include="Models\Sitter.cs" />
     <Compile Include="Models\Slot.cs" />
@@ -136,14 +139,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\BestBabySitter.accdb" />
-    <Content Include="App_Data\Images\img1.jpg" />
-    <Content Include="App_Data\Images\img2.jpg" />
-    <Content Include="App_Data\Images\img3.jpg" />
-    <Content Include="App_Data\Images\img4.jpg" />
-    <Content Include="App_Data\Images\m.jpg" />
-    <Content Include="App_Data\Images\img5.jpg" />
-    <Content Include="App_Data\Images\slide1.jpg" />
-    <Content Include="App_Data\Images\spikeball-ESlJNsYwIwM-unsplash.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -169,6 +164,14 @@
     <Content Include="Content\fonts\poppins\roboto-condensed-v16-latin-700italic.svg" />
     <Content Include="Content\fonts\poppins\roboto-condensed-v16-latin-italic.svg" />
     <Content Include="Content\fonts\poppins\roboto-condensed-v16-latin-regular.svg" />
+    <Content Include="Content\Images\img1.jpg" />
+    <Content Include="Content\Images\img2.jpg" />
+    <Content Include="Content\Images\img3.jpg" />
+    <Content Include="Content\Images\img4.jpg" />
+    <Content Include="Content\Images\img5.jpg" />
+    <Content Include="Content\Images\m.jpg" />
+    <Content Include="Content\Images\slide1.jpg" />
+    <Content Include="Content\Images\spikeball-ESlJNsYwIwM-unsplash.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -283,12 +286,24 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_ParentLayout.cshtml" />
     <Content Include="Views\Parent\Index.cshtml" />
-    <Content Include="Views\Parent\CreateAdvert.cshtml" />
-    <Content Include="Views\Parent\ManageAdvert.cshtml" />
-    <Content Include="Views\Home\ParentRegister.cshtml" />
+    <Content Include="Views\Parent\Create_Advert.cshtml" />
+    <Content Include="Views\Parent\Manage_Advert.cshtml" />
+    <Content Include="Views\Home\Parent_Register.cshtml" />
     <Content Include="Views\Shared\_SitterLayout.cshtml" />
     <Content Include="Views\Sitter\Index.cshtml" />
-    <Content Include="Views\Home\ParentLogin.cshtml" />
+    <Content Include="Views\Home\Parent_Login.cshtml" />
+    <Content Include="Views\Parent\Settings.cshtml" />
+    <Content Include="Views\Shared\_Admin.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Suspend_User.cshtml" />
+    <Content Include="Views\Admin\Verify_Sitter.cshtml" />
+    <Content Include="Views\Admin\Update_Info.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Sitter\Advert.cshtml" />
+    <Content Include="Views\Home\Sitter_Login.cshtml" />
+    <Content Include="Views\Home\Sitter_Register.cshtml" />
+    <Content Include="Views\Sitter\Slots.cshtml" />
+    <Content Include="Views\Sitter\Settings.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

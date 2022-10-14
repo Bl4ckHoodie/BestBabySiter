@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+@if (TempData["alertMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @TempData["alertMessage"].ToString().</strong>
+    </div>
+    TempData["alertMessage"] = null;
+}
+else if (TempData["errorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @TempData["errorMessage"].ToString().</strong>
+    </div>
+    TempData["errorMessage"] = null;
+};
+
+<!-- Dashboard Summary -->
+<div class="sitter-dashboard-summary" align="center">
+
+    <div class="dashboard-summary">
+        <Label class="dashboard-summary-label">Unverified Users</Label>
+        <div class="dashboard-summary-info">
+            <br /><span class="fa fa-id-card"></span>
+            @{ List<Best_BabySitter.Models.Sitter> sitters = TempData["unverifiedUsers"] as List<Best_BabySitter.Models.Sitter>;
+                <Label>@sitters.Count</Label>
+            }
+        </div>
+    </div>
+    <div class="dashboard-summary">
+        <Label class="dashboard-summary-label">Flagged Sitters</Label>
+        <div class="dashboard-summary-info">
+            <br /><span class="fa fa-exclamation-triangle"></span>
+            @{ List<Best_BabySitter.Models.Sitter> flagged = TempData["flaggedUsers"] as List<Best_BabySitter.Models.Sitter>;
+                <Label>@flagged.Count</Label>
+            }
+        </div>
+    </div>
+
+</div>

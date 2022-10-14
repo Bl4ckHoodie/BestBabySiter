@@ -1,0 +1,88 @@
+﻿@model Best_BabySitter.Models.Parent
+
+@{
+    ViewBag.Title = "ParentRegister";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h3>PARENT REGISTRATION</h3>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.f_name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.f_name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.f_name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.l_name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.l_name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.l_name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.street, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.street, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.street, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.city, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control", autocomplete = "do-not-autofill" } })
+            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+            @{ ModelState stateBag = new ModelState();
+                if (ViewData.ModelState.TryGetValue("Error", out stateBag))
+                {
+                    if (stateBag.Errors.Count > 0)
+                    {
+                        <p><a class="text-danger" style="text-align:center">@stateBag.Errors[0].Exception.Message</a></p>
+                    }
+                }
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="checkbox" id="terms-condition" title="Terms and Conditions" required/><a href="https://www.sanparks.org/docs/groups_tenders/2020/rfq-bsp-access-control/terms-of-reference.pdf"><label for="terms-condition">Terms and Conditions</label></a>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="reset" value="Cancel" class="btn normal-button" style="position:relative;top:14px; margin-right:10px;" />
+            <input type="submit" value="Register" class="btn action-button" />
+        </div>
+    </div>
+    <a href="@Url.Action("Parent_Login")">Already have an account?..</a>
+</div>
+}
+
+

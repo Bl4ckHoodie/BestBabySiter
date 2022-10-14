@@ -4,11 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Best BabySitter|@ViewBag.Title</title>
+    <link rel="icon" href="@Url.Content("~/Content/Images/logo.jpg")">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    
+
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -21,22 +22,68 @@
         <div class="navbar-collapse collapse ">
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("Register as Parent", "ParentRegister", "Home")</li>
-                <li>@Html.ActionLink("Login as Parent", "ParentLogin", "Home")</li>
+                <li>@Html.ActionLink("Register as Parent", "Parent_Register", "Home")</li>
+                <li>@Html.ActionLink("Login as Parent", "Parent_Login", "Home")</li>
+                <li>@Html.ActionLink("Register as Sitter", "Sitter_Register", "Home")</li>
+                <li>@Html.ActionLink("Login as Sitter", "Sitter_Login", "Home")</li>
                 <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
             </ul>
         </div>
     </div>
-    <div class="body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Best-BabySitter</p>
-        </footer>
+    <div class="main-body-container">
+        <div class="body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Best-BabySitter</p>
+            </footer>
+        </div>
     </div>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <h6>About</h6>
+                    <p class="text-justify">BestBabySitter is a company that aims to provide services by creating a bridging between parents and people that are need of services such as taking care of children</p>
+                </div>
 
+               
+
+                <div class="col-xs-6 col-md-3">
+                    <h6>Quick Links</h6>
+                    <ul class="footer-links">
+                        <li><a href="/Admin/Login/">Admin</a></li>
+                        <li><a href="/Home/About/">About Us</a></li>
+                        <li><a href="/Home/Contact/">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <p class="copyright-text">
+                        Copyright &copy; @DateTime.Now.Year - Best-BabySitter All Rights Reserved by
+                        <a href="#">Runtime Terror</a>.
+                    </p>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <ul class="social-icons">
+                        <li><a class="facebook" href="#"><i class="fa fa-facebook-f"></i></a></li>
+                        <li><a class="twitter" href="#"><i class="fa fa-twitter-square"></i></a></li>
+                        <li><a class="dribbble" href="#"><i class="fa fa-dribbble-square"></i></a></li>
+                        <li><a class="linkedin" href="#"><i class="fa fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/Script")
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

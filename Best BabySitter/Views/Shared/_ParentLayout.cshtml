@@ -5,6 +5,7 @@
 <head>
     <title>Parent| @ViewBag.Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="@Url.Content("~/Content/Images/logo.jpg")">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -24,22 +25,68 @@
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Dashboard", "Index", "Parent")</li>
                         <li>@Html.ActionLink("Sitters", "Sitters", "Parent")</li>
-                        <li>@Html.ActionLink("Create Advert", "CreateAdvert", "Parent")</li>
-                        <li>@Html.ActionLink("Manage Advert", "ManageAdvert", "Parent")</li>
+                        <li>@Html.ActionLink("Create Advert", "Create_Advert", "Parent")</li>
+                        <li>@Html.ActionLink("Manage Advert", "Manage_Advert", "Parent")</li>
                         <li>@Html.ActionLink("Settings", "Settings", "Parent")</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Parent")</li>
                     </ul>
                 </div>
             </div>
         </header>
-        <section id="container">
-            @RenderBody()
-        </section>
+        <div class="parent-main-container">
+            <section id="container">
+                @RenderBody()
+            </section>
+        </div>
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year </p>
+           
         </footer>
     </div>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <h6>About</h6>
+                    <p class="text-justify">BestBabySitter is a company that aims to provide services by creating a bridging between parents and people that are need of services such as taking care of children</p>
+                </div>
+
+
+
+                <div class="col-xs-6 col-md-3">
+                    <h6>Quick Links</h6>
+                    <ul class="footer-links">
+                        <li><a href="/Parent/Index/">Dashboard</a></li>
+                        <li><a href="/Parent/Sitters/">Find Sitters</a></li>
+                        <li><a href="/Parent/Create_advert/">Create Advert</a></li>
+                        <li><a href="/Parent/Manage_advert/">Manage Advert</a></li>
+                        <li><a href="/Parent/Settings/">Settings</a></li>
+                        <li><a href="/Parent/Logout/">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <p class="copyright-text">
+                        Copyright &copy; @DateTime.Now.Year - Best-BabySitter All Rights Reserved by
+                        <a href="#">Runtime Terror</a>.
+                    </p>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <ul class="social-icons">
+                        <li><a class="facebook" href="#"><i class="fa fa-facebook-f"></i></a></li>
+                        <li><a class="twitter" href="#"><i class="fa fa-twitter-square"></i></a></li>
+                        <li><a class="dribbble" href="#"><i class="fa fa-dribbble-square"></i></a></li>
+                        <li><a class="linkedin" href="#"><i class="fa fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/Script")
